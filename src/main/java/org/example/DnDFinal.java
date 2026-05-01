@@ -25,13 +25,14 @@ public class DnDFinal {
         boolean zraneny = false;
         boolean rychle = false;
         boolean priprava = false;
+        boolean selhani = false;
+        boolean spatnyKonec = false;
         //opakování míst ve vesnici
         boolean starostaNavstiven = false;
         boolean lovecNavstiven = false;
         boolean dumNavstiven = false;
         boolean opustitVesnici = false;
         boolean pokusilSeOdejit = false;
-        boolean prvniNavstevaVesnice = false;
         //místa
         boolean navstivenLes = false;
         boolean navstivenJeskyne = false;
@@ -669,7 +670,7 @@ public class DnDFinal {
             Není cesty dovnitř ani zpět.
             """);
             oddelit();
-            end("SELHÁNÍ");
+
             System.out.println("""
                     Snažíš se splynout s kultem,
                     ale uděláš chybu.
@@ -680,10 +681,8 @@ public class DnDFinal {
                     
                     Jsi obklopený
                     a bez šance cokoliv změnit.
-                    
-                    Tvoje mise končí dřív,
-                    než vůbec začala.
                     """);
+            s.selhani = true;
             return;
         }
 
@@ -694,26 +693,7 @@ public class DnDFinal {
         } else {
             System.out.println("Selhal jsi, infiltrovat se ti nepodařilo.");
             oddelit();
-            end("ŠPATNÝ KONEC");
-            System.out.println("""
-                    Neodoláš zpěvu.
-                
-                    Nejdřív ho jen posloucháš,
-                    ale postupně mu začneš věřit.
-
-                    Než si to uvědomíš,
-                    uděláš přesně to, co chce.
-
-                    Ztratíš kontrolu nad sebou.
-
-                    Kult tě přijme mezi sebe —
-                    ne jako rovnocenného člena,
-                    ale jako další nástroj.
-
-                    Lidé ve vesnici budou dál mizet.
-
-                    I proto, že jsi nepomohl.
-                    """);
+            s.spatnyKonec = true;
         }
     }
 
@@ -787,6 +767,8 @@ public class DnDFinal {
         if (s.rychle) vyhody++;
         //při vstupu do jeskyně
         if (s.priprava) vyhody++;
+
+        if (s.selhani || s.spatnyKonec) vyhody = 0;
 
         if (vyhody == 3) {
             end("DOBRÝ KONEC");
@@ -872,10 +854,9 @@ public class DnDFinal {
     }
 
 
-    //rozhodování o pokračování
+    //výběr z možností
     static int volba(int max) {
         int x;
-
         while (true) {
             if (sc.hasNextInt()) {
                 x = sc.nextInt();
