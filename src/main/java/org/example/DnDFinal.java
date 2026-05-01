@@ -5,7 +5,6 @@ import java.util.*;
 public class DnDFinal {
 
     static class Stav {
-
         //vztahy
         boolean duvera = false;
         boolean kultVi = false;
@@ -69,35 +68,26 @@ public class DnDFinal {
             System.exit(0);
         }
 
-        if (!s.prvniNavstevaVesnice) {
-            System.out.println("""
+        System.out.println("""
                 
                 = VESNICE HVOZD =
                 Stojíš na rozcestí mezi domy.
                 Z dálky slyšíš jen skučení větru a štěkot psa.
+                Do vesnice Hvozd přicházíš za soumraku.
+                
+                Vzduch je těžký, jako před bouří.
+                Lidé sklopí oči, když kolem nich projdeš.
+                Nikdo se neusmívá.
+                
+                V lese mizí lidé.
+                A tady se o tom nemluví.
                 """);
-            s.prvniNavstevaVesnice = true;
-        }
-
-        System.out.println("""
-            Do vesnice Hvozd přicházíš za soumraku.
-            
-            Vzduch je těžký, jako před bouří.
-            Lidé sklopí oči, když kolem nich projdeš.
-            Nikdo se neusmívá.
-            
-            V lese mizí lidé.
-            A tady se o tom nemluví.
-            """);
-
     }
 
     //začátek ve vesnici
     static void vesnice() {
 
         while(!s.opustitVesnici) {
-
-
 
             ramecek("""
                 Kam půjdeš?
