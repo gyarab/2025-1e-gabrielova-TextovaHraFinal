@@ -360,6 +360,7 @@ public class DnDFinal {
 
         s.rychle = true;
     }
+
     static void cesta() {
         System.out.println("""
             
